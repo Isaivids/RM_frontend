@@ -15,7 +15,6 @@ import {
 } from "../../store/slice/AddQuestion";
 import { useSelector } from "react-redux";
 import Spinner from "../spinner/Spinner";
-
 const MultiSelect = () => {
   const dummyPlaceholder = [
     { key: uuidv4(), value: "", state: true },
@@ -65,18 +64,22 @@ const MultiSelect = () => {
     }
   };
 
-  const checkIfSimilarOptionExists = async () =>{
-    // const optionsMap:any = {};
-    // const data = options.filter((opt:any) => opt.state === true)
-    // for (const obj of data) {
-    //   const { key,value } = obj;
-    //   if (optionsMap[value]) {
-    //     show(0,Messages.identical)
-    //   }else{
-    //     optionsMap[value] = value;
-    //   }
-    // }
-    update()
+  const checkIfSimilarOptionExists = async () => {
+    const optionsMap:any = {};
+    const selectedOptions = options.filter((opt) => opt.state === true);
+  
+    for (const obj of selectedOptions) {
+      const { key, value } = obj;
+      if (optionsMap[value]) {
+        show(0, Messages.identical);
+      } else {
+        optionsMap[value] = value;
+      }
+    }
+  
+    if (Object.keys(optionsMap).length === selectedOptions.length) {
+      update();
+    }
   }
 
   const update = async () => {
@@ -197,36 +200,36 @@ const MultiSelect = () => {
             />
             <Button label="Add Options" className="mt-3" onClick={handleAdd} />
             <div className="flex flex-column my-3">
-              {options.map((item: any) => {
-                return (
-                  <div key={item.key} className="flex gap-2">
-                    {item.state && (
-                      <>
-                        <InputText
-                          value={item.value}
-                          onChange={(e: any) => handleChange(e, item.key)}
-                          className="md:col-6 sm:col-11"
-                        />
-                        <Button
-                          onClick={() => handleDelete(item.key)}
-                          severity="danger"
-                          disabled={options.length <= 3}
-                          rounded
-                        >
-                          <MdRemoveCircle />
-                        </Button>
-                      </>
-                    )}
-                  </div>
-                );
-              })}
+              {options
+                .filter((item) => item.state) // Filter out options with state set to false
+                .map((item: any) => (
+                    <div key={item.key} className="flex py-1">
+                      {item.state && (
+                        <>
+                          <InputText
+                            value={item.value}
+                            onChange={(e: any) => handleChange(e, item.key)}
+                            className="md:col-6 sm:col-11"
+                          />
+                          <Button
+                            onClick={() => handleDelete(item.key)}
+                            severity="danger"
+                            disabled={options.filter((item) => item.state).length < 4}
+                            rounded
+                          >
+                            <MdRemoveCircle />
+                          </Button>
+                        </>
+                      )}
+                    </div>
+              ))}
             </div>
             <div className="flex gap-3 justify-content-end">
               <Button
                 label={params.questionid ? "Update" : "Submit"}
                 onClick={params.questionid ? checkIfSimilarOptionExists : load}
                 severity="success"
-                disabled={options.length < 4}
+                disabled={options.filter((item) => item.state).length < 4}
               />
               <Button
                 label="Cancel"
