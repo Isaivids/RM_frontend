@@ -66,16 +66,17 @@ const MultiSelect = () => {
   };
 
   const checkIfSimilarOptionExists = async () =>{
-    const optionsMap:any = {};
-    const data = options.filter((opt:any) => opt.state === true)
-    for (const obj of data) {
-      const { key,value } = obj;
-      if (optionsMap[value]) {
-        show(0,Messages.identical)
-      }else{
-        optionsMap[value] = value;
-      }
-    }
+    // const optionsMap:any = {};
+    // const data = options.filter((opt:any) => opt.state === true)
+    // for (const obj of data) {
+    //   const { key,value } = obj;
+    //   if (optionsMap[value]) {
+    //     show(0,Messages.identical)
+    //   }else{
+    //     optionsMap[value] = value;
+    //   }
+    // }
+    update()
   }
 
   const update = async () => {
