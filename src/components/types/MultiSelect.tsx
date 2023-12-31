@@ -198,7 +198,12 @@ const MultiSelect = () => {
               rows={1}
               style={{ width: "100%" }}
             />
-            <Button label="Add Options" className="mt-3" onClick={handleAdd} />
+            <Button 
+              label="Add Options" 
+              className="mt-3" 
+              onClick={handleAdd} 
+              disabled={options.filter((item) => item.state).length >= 6 }
+            />
             <div className="flex flex-column my-3">
               {options
                 .filter((item) => item.state) // Filter out options with state set to false

@@ -24,7 +24,17 @@ const SurveyDetailsGrid = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const navigateToEdit = (rowData:any) =>{
-    navigate(`/surveyDetails/${rowData.surveyid}/multiselect/${rowData.questionid}`)
+    console.log(rowData)
+    switch (rowData.questiontype) {
+      case 1:
+        navigate(`/surveyDetails/${rowData.surveyid}/multiselect/${rowData.questionid}`)
+        break;
+      case 2:
+        navigate(`/surveyDetails/${rowData.surveyid}/radio/${rowData.questionid}`)
+        break;
+      default:
+        break;
+    }
   }
   const confirm = (row: any) => {
     confirmDialog({
