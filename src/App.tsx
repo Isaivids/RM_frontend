@@ -1,25 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.scss";
+import Navbar from "./components/navbar/Navbar";
+import { Route, Routes } from "react-router-dom";
+import NewSurvey from "./pages/newSurvey/NewSurvey";
+import SurveyDetails from "./pages/surveydetails/SurveyDetails";
+import SurveyOptions from "./pages/surveyoptions/SurveyOptions";
+import Error from "./pages/error/Error";
+import MultiSelect from "./components/types/MultiSelect";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<NewSurvey />} />
+        <Route path="/surveyDetails/:surveyid" element={<SurveyDetails />} />
+        <Route path="/surveyDetails/:surveyid/surveyOptions" element={<SurveyOptions />} />
+        <Route path="/surveyDetails/:surveyid/multiselect/:questionid" element={<MultiSelect />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+    </>
   );
 }
 

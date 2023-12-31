@@ -1,0 +1,24 @@
+@import "../node_modules/primeflex/primeflex.scss";
+@import "../node_modules/primereact/resources/themes/lara-light-indigo/theme.css";
+@import "../node_modules/primereact/resources/primereact.min.css";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+* {
+  font-family: "Poppins", sans-serif;
+}
+a{
+  text-decoration: none !important;
+}
+
+.p-button {
+  padding: 0.3rem 0.6rem;
+}
+
+.p-icon {
+  width: 0.6rem;
+  height: 0.6rem;
+}
